@@ -22,9 +22,11 @@ jobs:
                   # ESLint and Prettier must be in `package.json`
             - name: Install Node.js dependencies
               run: npm install --legacy-peer-deps
+              working-directory: frontend
 
             - name: install eslint
               run: npx eslint .
+              working-directory: frontend
 
             - name: Run linters
               uses: wearerequired/lint-action@v2
