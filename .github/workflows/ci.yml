@@ -9,5 +9,5 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name : checkut
+            - name : checkout
               uses: actions/checkout@v7
