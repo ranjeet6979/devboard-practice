@@ -25,11 +25,5 @@ jobs:
               working-directory: frontend
 
             - name: install eslint
-              run: npx eslint .
+              run: npm run lint
               working-directory: frontend
-
-            - name: Run linters
-              uses: wearerequired/lint-action@v2
-              with:
-                eslint: true
-                prettier: true
