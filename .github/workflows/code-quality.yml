@@ -1,0 +1,51 @@
+#Goal: check code qulity i.e. linting (SAST of the application)
+name: code quality
+
+on:
+    workflow_call
+
+jobs:
+    node-code-quality:
+
+        runs-on: ubuntu-26.04-arm
+        steps:
+            - name: git checkout
+              uses: actions/checkout@v7
+              
+            - name: setup node
+              uses: actions/setup-node@v6
+              with:
+                node-version: 20
+                cache: 'npm'
+                cache-dependency-path: frontend/package-lock.json
+            
+            #                   # ESLint and Prettier must be in `package.json`
+            - name: Install Node.js dependencies
+              run: npm install --legacy-peer-deps
+              working-directory: frontend
+
+            - name: install eslint
+              run: npm run lint
+              working-directory: frontend
+
+    go-code-quality:
+
+        runs-on: ubuntu-26.04-arm
+        steps:
+            - name: git checkout
+              uses: actions/checkout@v7
+
+            - name: setup go
+              uses: actions/setup-go@v6
+              with:
+                go-version: 1.23
+                go-version-file: 'go.mod'
+                cache-dependency-path: backend/go.sum
+
+            - name: go gormatter
+              run: go fmt
+              working-directory: backend
+
+            - name: go vet
+              run: go vet
+              working-directory: backend
