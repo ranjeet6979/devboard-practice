@@ -1,5 +1,5 @@
 #goal: To run end to end devsecops CICD pipeline
-name : devsecops_devployment
+name : devsecops_deployment
 
 on:
     push:
@@ -9,3 +9,6 @@ on:
 jobs:
     code-quality:
         uses: ./.github/workflows/code-quality.yml
+
+    git-leaks-check:
+        uses: ./.github/workflows/secret-scanning.yml
