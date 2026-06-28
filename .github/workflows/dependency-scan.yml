@@ -43,5 +43,7 @@ jobs:
 
             - name: go vuln check
               uses: golang/govulncheck-action@v1
+              with:
+                work-dir: backend
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
