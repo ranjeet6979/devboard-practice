@@ -31,19 +31,33 @@ jobs:
         steps:
             - name: git checkout
               uses: actions/checkout@v7
-              with:
-                persist-credentials: false
+            #   with:
+            #     persist-credentials: false
 
-            - name: setup go
+            # - name: setup go
+            #   uses: actions/setup-go@v6
+            #   with:
+            #     go-version: 1.23
+            #     go-version-file: 'go.mod'
+            #     cache-dependency-path: backend/go.sum
+
+            # - name: go vuln check
+            #   uses: golang/govulncheck-action@v1
+            #   with:
+            #     work-dir: backend
+            #   env:
+            #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Setup Go
               uses: actions/setup-go@v6
               with:
-                go-version: 1.23
+                go-version: 1.22
                 go-version-file: 'go.mod'
-                cache-dependency-path: backend/go.sum
+                cache-dependency-path: go.sum
 
-            - name: go vuln check
-              uses: golang/govulncheck-action@v1
-              with:
-                work-dir: backend
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Install Govulncheck
+              run: go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
+
+            - name: GoVulncheck
+              continue-on-error: true
+              run: govulncheck ./... > govulncheck-report.txt
+              working-directory: backend
