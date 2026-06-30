@@ -1,0 +1,19 @@
+name: docker-file&image-scan
+
+on:
+    workflow_call
+
+jobs:
+    docker-file-scan-frontend:
+        runs-on: ubuntu-26.04-arm
+        strategy:
+          matrix:
+            folder: [backend, frontend]        
+        steps:
+            - name : checkout
+              uses: actions/checkout@v7
+
+            - name: 
+              uses: hadolint/hadolint-action@v3.3.0
+              with:
+                dockerfile: ${{ matrix.folder }}/Dockerfile
