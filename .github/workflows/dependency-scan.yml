@@ -31,22 +31,7 @@ jobs:
         steps:
             - name: git checkout
               uses: actions/checkout@v7
-            #   with:
-            #     persist-credentials: false
-
-            # - name: setup go
-            #   uses: actions/setup-go@v6
-            #   with:
-            #     go-version: 1.23
-            #     go-version-file: 'go.mod'
-            #     cache-dependency-path: backend/go.sum
-
-            # - name: go vuln check
-            #   uses: golang/govulncheck-action@v1
-            #   with:
-            #     work-dir: backend
-            #   env:
-            #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
             - name: Setup Go
               uses: actions/setup-go@v6
               with:
