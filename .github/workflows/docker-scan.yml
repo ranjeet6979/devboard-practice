@@ -19,5 +19,5 @@ jobs:
                 dockerfile: ${{ matrix.folder }}/Dockerfile
             
             - name: docker-image-build
-              run: docker build -t {{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder }} .
+              run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder }} .
               working-directory: ${{ matrix.folder }}
